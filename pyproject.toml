@@ -28,7 +28,7 @@ markers = [
 
 [tool.coverage.run]
 branch = true
-source = ["django-codegen"]
+source = ["djangoaddicts.codegen"]
 omit = ["*_test.py", "*/test/*"]
 
 
