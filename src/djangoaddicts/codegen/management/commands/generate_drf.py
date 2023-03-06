@@ -22,7 +22,7 @@ class Command(BaseCommand):
         parser.add_argument('--filterset', action='store_true', help='generate filtersets and create filters.py')
         parser.add_argument('--serializer', action='store_true', help='generate serializers and create serializers.py')
         parser.add_argument('--url', action='store_true', help='generate urls and create urls.py')
-        parser.add_argument('--viewset', action='store_true', help='generate viewsets and create viewsets.py')
+        parser.add_argument('--_viewset', action='store_true', help='generate viewsets and create viewsets.py')
         parser.add_argument('--output_path', type=str, default=None, help='path where files should be created')
         parser.add_argument('--output_file', type=str, default=None,
                             help='fully qualified name of file to be created; only use this when generating one file')
@@ -65,7 +65,7 @@ class Command(BaseCommand):
             )
 
         # build viewsets file
-        if options['viewset']:
+        if options['_viewset']:
             files_created_list.append(
                 self.build_viewsets(output_path=options['output_path'],
                                     output_file=options['output_file'],
@@ -173,7 +173,7 @@ class Command(BaseCommand):
         try:
             if not template_file:
                 template_file = os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                             'drf_templates', 'viewset.jinja')
+                                             'drf_templates', '_viewset.jinja')
             if output_file:
                 output_path = output_file
             elif not output_path:

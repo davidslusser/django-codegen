@@ -1,4 +1,4 @@
-def test_{{ route.name|replace("-", "_") }}(self):
+    def test_{{ route.name|replace("-", "_") }}(self):
         """ verify the {{ route.name }} endpoint returns a 200 and the row content is found """
         url = reverse('{{ route.app_name }}:{{ route.name }}'{% if '-list' not in route.name %}, args=[getattr(self.row, '{{ view.lookup_field }}')]{% endif %})
         response = self.client.get(url, format='json')

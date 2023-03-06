@@ -29,7 +29,7 @@ class UserSetupMixin:
         self.user = baker.make('auth.User', username='tester_basic')
         self.token = baker.make('authtoken.Token', user=self.user)
         self.client = APIClient()
-        self.client.credentials(**dict(HTTP_AUTHORIZATION=f'Token {token.key}'))
+        self.client.credentials(**dict(HTTP_AUTHORIZATION=f'Token {self.token.key}'))
 
 {% for view, route_list in data.items() %}
 class {{ view.model.__name__ }}Tests(UserSetupMixin, APITestCase):
@@ -38,10 +38,6 @@ class {{ view.model.__name__ }}Tests(UserSetupMixin, APITestCase):
         super({{ view.model.__name__}}Tests, self).setUp()
         self.row = baker.make('{{ view.model._meta.app_label }}.{{ view.model.__name__}}')
     {% for route in route_list %}
-    {%- if view.permission_dict -%}
-        {% include 'viewset_auth.jinja' %}
-    {%- else -%}
-        {% include 'viewset_noauth.jinja' %}
-    {%- endif %}
+    {% include 'viewset/base.jinja' %}
     {% endfor %}
 {% endfor %}

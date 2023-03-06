@@ -1,7 +1,0 @@
-{%+ if '-list' in route.name  +%}
-    {% include 'viewset/viewset_noauth_list.jinja' %}
-{%- elif '-detail' in route.name +%}
-    {% include 'viewset/viewset_noauth_detail.jinja' %}
-{%- else +%}
-    {% include 'viewset/viewset_noauth_action.jinja' %}
-{%- endif -%}

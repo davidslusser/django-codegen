@@ -27,7 +27,7 @@ class {{ model.__name__ }}Filter(FilterSet):
 {% endfor +%}
 {%- for field in model.generic_relation_list %}
     {{ field }} = RelatedFilter('{{ model|attr(field)|attr('field')|attr('related_model')|attr('__name__') }}', field_name='{{ field }}', queryset={{ model|attr(field)|attr('field')|attr('related_model')|attr('__name__') }}.objects.all())
-    has_{{ field }} = BooleanFilter(field_name='{{ field }}', lookup_expr='isnull', exclude=True)
+    has_{{ field }} = BooleanFilter(field_name='{{ field }}Filter', lookup_expr='isnull', exclude=True)
 {% endfor +%}
     class Meta:
         model = {{ model.__name__ }}
